@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="store">
+	
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link type="text/css" href="bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	
+	</head>
+	<!--
+	orderBy: '-prop' will list the items in descending order of prop, without the minus the items will be listed in ascending order of prop
+	-->
+	<body style="color: black;" ng-controller="StoreController as store">
+		<div class="container">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="product in store.products | limitTo:4 | orderBy:'price'"
+				    ng-hide="store.product.soldOut">
+					<h3>{{product.name}}
+						<em class="pull-right">{{product.price | currency}}</em>
+						<img style="object-fit: cover" ng-src="{{product.images[0].full}}" class="img-thumbnail img-responsive center-block" width="250px" height="250px">
+					</h3>
+					<!--<p>{{product.description}}</p>-->
+					<button class="btn btn-default pull-right" ng-show="product.canPurchase">Add to Cart</button>
+					
+					<section ng-controller="PanelController as panel">
+						<ul class="nav nav-pills">
+							<li ng-class="{active:panel.isSelected(1)}"><a href="" ng-click="panel.selectTab(1)">Description</a> </li>
+							<li ng-class="{active:panel.isSelected(2)}"><a href="" ng-click="panel.selectTab(2)">Specifications</a> </li>
+							<li ng-class="{active:panel.isSelected(3)}"><a href="" ng-click="panel.selectTab(3)">Reviews</a> </li>
+						</ul>
+						<div class="panel" ng-show="panel.isSelected(1)">
+						<h4><small>Description</small></h4>
+							<blockquote>{{product.description}}</blockquote>
+						</div>
+						<div class="panel" ng-show="panel.isSelected(2)">
+							<h4><small>Specifications</small></h4>
+							<blockquote>None Yet</blockquote>
+						</div>
+						<div class="panel" ng-show="panel.isSelected(3)">
+							<h4><small>Reviews</small></h4>
+							<blockquote ng-repeat="review in product.reviews">
+								<b>{{review.stars + " Stars"}}</b><br>
+								{{review.body}}<br>
+								<cite class="small">{{review.author}}</cite>
+							</blockquote>
+							<form name="reviewForm">
+								<blockquote>
+									<b>{{review.stars + " Star"}}</b><br>
+									{{review.body}}<br>
+									<cite class="small">{{review.author}}</cite>
+								</blockquote>
+								<select class="well well-sm" style="width: 50%" ng-model="review.stars">
+									<option value="1">1 Star</option>
+									<option value="2">2 Stars</option>
+									<option value="3">3 Stars</option>
+									<option value="4">4 Stars</option>
+									<option value="5">5 Stars</option>
+								</select>
+								<p><textarea style="width: 50%" rows="4" ng-model="review.body"></textarea></p>
+								<p><label>by: </label>
+								<input type="email" ng-model="review.author"></p>
+								<p><input type="submit" value="Submit"></p>
+							</form>
+						</div>
+						
+					</section>
+				</li>
+			</ul>
+			
+		</div>
+	
+	
+	</body>
+
+</html>
