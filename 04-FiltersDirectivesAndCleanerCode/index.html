@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="store">
+	
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link type="text/css" href="bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	
+	</head>
+	<!--
+	orderBy: '-prop' will list the items in descending order of prop, without the minus the items will be listed in ascending order of prop
+	-->
+	<body style="color: black;" ng-controller="StoreController as store">
+		<div class="container">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="product in store.products | limitTo:4 | orderBy:'price'"
+				    ng-hide="store.product.soldOut">
+					<img ng-src="{{product.images[0].full}}" width="100px">
+					<h3>{{product.name}}
+						<em class="pull-right">{{product.price | currency}}</em>
+					</h3>
+					<!--<p>{{product.description}}</p>-->
+					<button ng-show="product.canPurchase">Add to Cart</button>
+				</li>
+			</ul>
+		</div>
+	
+	
+	</body>
+
+</html>
