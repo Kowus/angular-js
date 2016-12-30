@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="store">
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link type="text/css" href="bootstrap.min.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+		<div ng-controller="StoreController as store">
+			<h1>{{store.product.name}}</h1>
+			<h2>${{store.product.price}}</h2>
+			<p>{{store.product.description}}</p>
+		</div>
+
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</body>
+
+</html>
