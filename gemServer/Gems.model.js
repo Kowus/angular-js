@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+
 var Reviews = new Schema({
 	stars: Number,
 	body: String,
