@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 // Add headers
+// I added this middleware so other projects(aside contents of this folder) can connect. 
 app.use(function (req, res, next) {
 	
 	// Website you wish to allow to connect
